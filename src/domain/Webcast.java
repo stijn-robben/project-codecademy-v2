@@ -17,4 +17,26 @@ public class Webcast extends ContentItem {
         this.url = url;
     }
 
+    public String getSpeakerName() {
+        return speakerName;
+    }
+
+    public int getSpeakerOrganization() {
+        return speakerOrganization;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    
+
 }

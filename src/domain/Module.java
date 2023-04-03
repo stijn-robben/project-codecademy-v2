@@ -18,4 +18,22 @@ public class Module extends ContentItem {
         this.duration = duration;
         this.order = order;
     }
+
+    public String getNameContactPerson() {
+        return nameContactPerson;
+    }
+
+    public String getEmailContactPerson() {
+        return emailContactPerson;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public List<ContentItem> getOrder() {
+        return order;
+    }
+
+    
 }
