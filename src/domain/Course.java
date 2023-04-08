@@ -1,7 +1,5 @@
 package domain;
 
-import java.util.List;
-
 public class Course {
 
     private String id;
@@ -9,16 +7,13 @@ public class Course {
     private String subject;
     private String level;
     private String introText;
-    private List<ContentItem> contentItems;
 
-    public Course(String id, String name, String subject, String level, String introText,
-            List<ContentItem> contentItems) {
+    public Course(String id, String name, String subject, String level, String introText) {
         this.id = id;
         this.name = name;
         this.subject = subject;
         this.level = level;
         this.introText = introText;
-        this.contentItems = contentItems;
     }
 
     public String getId() {
@@ -41,8 +36,30 @@ public class Course {
         return introText;
     }
 
-    public List<ContentItem> getContentItems() {
-        return contentItems;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public void setIntroText(String introText) {
+        this.introText = introText;
+    }
+
+    @Override
+    public String toString() {
+        return "Course [id=" + id + ", name=" + name + ", subject=" + subject + ", level=" + level + ", introText="
+                + introText + "]";
     }
 
 }

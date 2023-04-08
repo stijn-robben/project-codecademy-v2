@@ -32,7 +32,37 @@ public class Main {
             // Test deleting a student
             studentHandler.deleteStudent(student.getEmail());
             System.out.println("Deleted student: " + student);
+            System.out.println("Student works");
+            connection.closeConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
+        try {
+            DatabaseConnection connection = new DatabaseConnection();
+            CourseHandler courseHandler = new CourseHandler(connection.getConnection());
+
+            // Test adding a course
+            Course course = new Course("14", "Intro to Architecture", "Mechanical Engineering", "Beginner",
+                    "This course provides an introduction to architecture.");
+            courseHandler.addCourse(course);
+            System.out.println("Added course: " + course);
+
+            // Test getting all courses
+            System.out.println("All courses:");
+            courseHandler.getCourses().forEach(System.out::println);
+
+            // Test updating a course
+            course.setName("Advanced architecture");
+            course.setSubject("Architecture");
+            course.setIntroText("This course provides advanced architecture techniques.");
+            courseHandler.updateCourse(course);
+            System.out.println("Updated course: " + course);
+
+            // Test deleting a course
+            courseHandler.deleteCourse(course.getName());
+            System.out.println("Deleted course: " + course);
+            System.out.println("Course works");
             connection.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
