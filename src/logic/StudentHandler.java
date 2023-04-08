@@ -1,29 +1,30 @@
 package logic;
 
+import java.sql.*;
 import java.util.List;
-
 import domain.Student;
+import data.StudentRepository;
 
 public class StudentHandler {
-    private StudentRepository studentRepository;
+    private final StudentRepository studentRepository;
 
-    public StudentHandler(StudentRepository studentRepository){
-
+    public StudentHandler(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
     }
 
-    private List<Student> getAllStudents() {
-
+    public void addStudent(Student student) throws SQLException {
+        studentRepository.addStudent(student);
     }
 
-    private void addStudent(Student student) {
-
+    public List<Student> getStudents() throws SQLException {
+        return studentRepository.getStudents();
     }
 
-    private void updateStudent(Student student) {
-        
+    public void deleteStudent(String email) throws SQLException {
+        studentRepository.deleteStudent(email);
     }
 
-    private void deleteStudent(Student student) {
-        
+    public void updateStudent(Student student) throws SQLException {
+        studentRepository.updateStudent(student);
     }
 }
