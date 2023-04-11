@@ -1,71 +1,37 @@
-import java.sql.SQLException;
-
 import data.*;
 import logic.*;
 import domain.*;
+import gui.*;
 
-public class Main {
-    public static void main(String[] args) throws ClassNotFoundException {
-        try {
-            DatabaseConnection connection = new DatabaseConnection();
-            StudentRepository studentRepository = new StudentRepository(connection.getConnection());
-            StudentHandler studentHandler = new StudentHandler(studentRepository);
+import javafx.application.Application;
+import javafx.stage.Stage;
 
-            // Test adding a student
-            Student student = new Student("student15@example.com", "Bob Wood", "2000-05-10", "M", "5 Oak St",
-                    "New York", "USA", "1234 AB");
-            studentHandler.addStudent(student);
-            System.out.println("Added student: " + student);
+public class Main extends Application {
 
-            // Test getting all students
-            System.out.println("All students:");
-            studentHandler.getStudents().forEach(System.out::println);
+    public static void main(String[] args) {
+        launch(args);
+    }
 
-            // Test updating a student
-            student.setName("Jane Doe");
-            student.setAddress("456 Elm St");
-            student.setCity("San Francisco");
-            student.setCountry("USA");
-            studentHandler.updateStudent(student);
-            System.out.println("Updated student: " + student);
+    @Override
+    public void start(Stage stage) {
+        // Create view instances
+        StudentView studentView = new StudentView();
+        OverviewView overviewView = new OverviewView();
+        EnrollementView enrollementView = new EnrollementView();
+        CourseView courseView = new CourseView();
+        CertificateView certificateView = new CertificateView();
 
-            // Test deleting a student
-            studentHandler.deleteStudent(student.getEmail());
-            System.out.println("Deleted student: " + student);
-            System.out.println("Student works");
-            connection.closeConnection();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        // Initialize the MainView with the views
+        MainView mainView = new MainView();
+        mainView.setStudentView(studentView);
+        mainView.setOverviewView(overviewView);
+        mainView.setEnrollementView(enrollementView);
+        mainView.setCourseView(courseView);
+        mainView.setCertificateView(certificateView);
 
-        try {
-            DatabaseConnection connection = new DatabaseConnection();
-            CourseHandler courseHandler = new CourseHandler(connection.getConnection());
+        stage.setTitle(
+                "Stijn Robben (2205997), Stefan Dekkers (2198892), Bas Dekker (2195403), Jozef van Dijk (2187288)");
 
-            // Test adding a course
-            Course course = new Course("14", "Intro to Architecture", "Mechanical Engineering", "Beginner",
-                    "This course provides an introduction to architecture.");
-            courseHandler.addCourse(course);
-            System.out.println("Added course: " + course);
-
-            // Test getting all courses
-            System.out.println("All courses:");
-            courseHandler.getCourses().forEach(System.out::println);
-
-            // Test updating a course
-            course.setName("Advanced architecture");
-            course.setSubject("Architecture");
-            course.setIntroText("This course provides advanced architecture techniques.");
-            courseHandler.updateCourse(course);
-            System.out.println("Updated course: " + course);
-
-            // Test deleting a course
-            courseHandler.deleteCourse(course.getName());
-            System.out.println("Deleted course: " + course);
-            System.out.println("Course works");
-            connection.closeConnection();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        mainView.mainView(stage);
     }
 }
