@@ -13,13 +13,13 @@ public class CourseRepository {
     }
 
     public void addCourse(Course course) throws SQLException {
-        String query = "INSERT INTO Course (Id, CourseName, Subject, Level, IntroductionText) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO Course (CourseID, CourseName, Subject, IntroductionText, Level) VALUES (?, ?, ?, ?, ?)";
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setString(1, course.getId());
         statement.setString(2, course.getName());
         statement.setString(3, course.getSubject());
-        statement.setString(4, course.getLevel());
-        statement.setString(5, course.getIntroText());
+        statement.setString(4, course.getIntroText());
+        statement.setString(5, course.getLevel());
         statement.executeUpdate();
         statement.close();
     }

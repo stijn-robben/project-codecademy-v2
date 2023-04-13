@@ -1,14 +1,13 @@
 {
-    "java.project.referencedLibraries": [
-        "lib/**/*.jar",
-        "c:\\Users\\stijn\\Desktop\\Drivers\\javafx-sdk-17.0.2\\javafx-sdk-17.0.2\\lib\\javafx.base.jar",
-        "c:\\Users\\stijn\\Desktop\\Drivers\\javafx-sdk-17.0.2\\javafx-sdk-17.0.2\\lib\\javafx.controls.jar",
-        "c:\\Users\\stijn\\Desktop\\Drivers\\javafx-sdk-17.0.2\\javafx-sdk-17.0.2\\lib\\javafx.fxml.jar",
-        "c:\\Users\\stijn\\Desktop\\Drivers\\javafx-sdk-17.0.2\\javafx-sdk-17.0.2\\lib\\javafx.graphics.jar",
-        "c:\\Users\\stijn\\Desktop\\Drivers\\javafx-sdk-17.0.2\\javafx-sdk-17.0.2\\lib\\javafx.media.jar",
-        "c:\\Users\\stijn\\Desktop\\Drivers\\javafx-sdk-17.0.2\\javafx-sdk-17.0.2\\lib\\javafx.swing.jar",
-        "c:\\Users\\stijn\\Desktop\\Drivers\\javafx-sdk-17.0.2\\javafx-sdk-17.0.2\\lib\\javafx.web.jar",
-        "c:\\Users\\stijn\\Desktop\\Drivers\\javafx-sdk-17.0.2\\javafx-sdk-17.0.2\\lib\\javafx-swt.jar",
-        "c:\\Users\\stijn\\Desktop\\Drivers\\sqljdbc_11.2\\enu\\mssql-jdbc-11.2.1.jre11.jar"
-    ]
+  "java.project.referencedLibraries": [
+    "lib/**/*.jar",
+    "c:\\Users\\Stefan\\Documents\\JavaFX\\openjfx-17.0.2_windows-x64_bin-sdk\\javafx-sdk-17.0.2\\lib\\javafx.base.jar",
+    "c:\\Users\\Stefan\\Documents\\JavaFX\\openjfx-17.0.2_windows-x64_bin-sdk\\javafx-sdk-17.0.2\\lib\\javafx.controls.jar",
+    "c:\\Users\\Stefan\\Documents\\JavaFX\\openjfx-17.0.2_windows-x64_bin-sdk\\javafx-sdk-17.0.2\\lib\\javafx.fxml.jar",
+    "c:\\Users\\Stefan\\Documents\\JavaFX\\openjfx-17.0.2_windows-x64_bin-sdk\\javafx-sdk-17.0.2\\lib\\javafx.graphics.jar",
+    "c:\\Users\\Stefan\\Documents\\JavaFX\\openjfx-17.0.2_windows-x64_bin-sdk\\javafx-sdk-17.0.2\\lib\\javafx.media.jar",
+    "c:\\Users\\Stefan\\Documents\\JavaFX\\openjfx-17.0.2_windows-x64_bin-sdk\\javafx-sdk-17.0.2\\lib\\javafx.swing.jar",
+    "c:\\Users\\Stefan\\Documents\\JavaFX\\openjfx-17.0.2_windows-x64_bin-sdk\\javafx-sdk-17.0.2\\lib\\javafx.web.jar",
+    "c:\\Users\\Stefan\\Documents\\JavaFX\\openjfx-17.0.2_windows-x64_bin-sdk\\javafx-sdk-17.0.2\\lib\\javafx-swt.jar"
+  ]
 }

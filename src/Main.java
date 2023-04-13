@@ -17,7 +17,7 @@ public class Main extends Application {
         // Create view instances
         StudentView studentView = new StudentView();
         OverviewView overviewView = new OverviewView();
-        EnrollementView enrollementView = new EnrollementView();
+        EnrollmentView enrollementView = new EnrollmentView();
         CourseView courseView = new CourseView();
         CertificateView certificateView = new CertificateView();
 
@@ -25,12 +25,11 @@ public class Main extends Application {
         MainView mainView = new MainView();
         mainView.setStudentView(studentView);
         mainView.setOverviewView(overviewView);
-        mainView.setEnrollementView(enrollementView);
+        mainView.setEnrollmentView(enrollementView);
         mainView.setCourseView(courseView);
         mainView.setCertificateView(certificateView);
 
-        stage.setTitle(
-                "Stijn Robben (2205997), Stefan Dekkers (2198892), Bas Dekker (2195403), Jozef van Dijk (2187288)");
+        stage.setTitle("Stijn Robben (2205997), Stefan Dekkers (2198892), Bas Dekker (2195403), Jozef van Dijk (2187288)");
 
         mainView.mainView(stage);
     }
