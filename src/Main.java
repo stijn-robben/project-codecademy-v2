@@ -9,6 +9,10 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     public static void main(String[] args) {
+        // Student s1 = new Student("test@test.nl", "Stefan Dekkers", "01/01/2000",
+        //  "Male", "Lovensdijkstraat", "Breda", "Netherlands", "4818 AJ");
+        // System.out.println(s1);
+        
         launch(args);
     }
 
