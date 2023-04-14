@@ -1,27 +1,22 @@
 {
-  // Use IntelliSense to learn about possible attributes.
-  // Hover to view descriptions of existing attributes.
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "type": "java",
-      "name": "Current File",
-      "request": "launch",
-      "mainClass": "${file}"
-    },
-    {
-      "type": "java",
-      "name": "Main",
-      "request": "launch",
-      "vmArgs": [
-        "--module-path",
-        "C:\\Users\\Stefan\\Documents\\JavaFX\\openjfx-17.0.2_windows-x64_bin-sdk\\javafx-sdk-17.0.2\\lib",
-        "--add-modules",
-        "javafx.controls,javafx.fxml"
-      ],
-      "mainClass": "Main",
-      "projectName": "project-codecademy-v2_46f976d7"
-    }
-  ]
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "vmArgs": "-p c:\\Users\\stijn\\Desktop\\Drivers\\javafx-sdk-17.0.2\\javafx-sdk-17.0.2\\lib --add-modules javafx.controls",
+            "mainClass": "Main",
+            "projectName": "project-codecademy-v2_9577bc05"
+        }
+    ]
 }
