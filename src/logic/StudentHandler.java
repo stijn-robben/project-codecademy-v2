@@ -8,8 +8,8 @@ import data.StudentRepository;
 public class StudentHandler {
     private final StudentRepository studentRepository;
 
-    public StudentHandler(StudentRepository studentRepository) {
-        this.studentRepository = studentRepository;
+    public StudentHandler(Connection connection) {
+        this.studentRepository = new StudentRepository(connection);
     }
 
     public void addStudent(Student student) throws SQLException {

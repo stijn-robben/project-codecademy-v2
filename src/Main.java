@@ -1,3 +1,6 @@
+import java.sql.Connection;
+import java.sql.SQLException;
+
 import data.*;
 import logic.*;
 import domain.*;
@@ -13,23 +16,24 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage stage) {
-        // Create view instances
+    public void start(Stage stage) throws ClassNotFoundException, SQLException {
         StudentView studentView = new StudentView();
         OverviewView overviewView = new OverviewView();
         EnrollmentView enrollementView = new EnrollmentView();
         CourseView courseView = new CourseView();
         CertificateView certificateView = new CertificateView();
+        DatabaseConnection connection = new DatabaseConnection();
+        StudentHandler studentHandler = new StudentHandler(connection.getConnection());
 
-        // Initialize the MainView with the views
         MainView mainView = new MainView();
         mainView.setStudentView(studentView);
         mainView.setOverviewView(overviewView);
         mainView.setEnrollmentView(enrollementView);
         mainView.setCourseView(courseView);
         mainView.setCertificateView(certificateView);
-
-        stage.setTitle("Stijn Robben (2205997), Stefan Dekkers (2198892), Bas Dekker (2195403), Jozef van Dijk (2187288)");
+        mainView.setStudentHandler(studentHandler);
+        stage.setTitle(
+                "Stijn Robben (2205997), Stefan Dekkers (2198892), Bas Dekker (2195403), Jozef van Dijk (2187288)");
 
         mainView.mainView(stage);
     }

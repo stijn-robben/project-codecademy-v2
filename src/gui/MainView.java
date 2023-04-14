@@ -8,6 +8,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import logic.StudentHandler;
 
 public class MainView {
     private StudentView studentView;
@@ -15,15 +16,17 @@ public class MainView {
     private EnrollmentView enrollementView;
     private CourseView courseView;
     private CertificateView certificateView;
+    private StudentHandler studentHandler;
 
     public void mainView(Stage stage) {
         VBox vbox = new VBox();
         vbox.setSpacing(14);
-        vbox.setPadding(new Insets(8)); 
+        vbox.setPadding(new Insets(8));
 
         Label label1 = new Label("Home");
         label1.setFont(Font.font("Arial", 16));
-        Label label2 = new Label("Choose one of the options to create, read, update or delete content in the database.");
+        Label label2 = new Label(
+                "Choose one of the options to create, read, update or delete content in the database.");
         label2.setFont(Font.font("Arial", 13));
         Button button1 = new Button("Students");
         button1.setFont(Font.font("Arial", 13));
@@ -42,7 +45,7 @@ public class MainView {
         vbox.getChildren().addAll(label1, label2, buttons);
 
         // Actions
-        button1.setOnAction(e -> studentView.studentView(stage, this));
+        button1.setOnAction(e -> studentView.studentView(stage, this, studentHandler));
         button2.setOnAction(e -> courseView.courseView(stage, this));
         button3.setOnAction(e -> enrollementView.enrollmentView(stage, this));
         button4.setOnAction(e -> certificateView.certificateView(stage, this));
@@ -71,5 +74,9 @@ public class MainView {
 
     public void setCertificateView(CertificateView certificateView) {
         this.certificateView = certificateView;
+    }
+
+    public void setStudentHandler(StudentHandler studentHandler) {
+        this.studentHandler = studentHandler;
     }
 }

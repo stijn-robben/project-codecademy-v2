@@ -1,5 +1,10 @@
 package gui;
 
+import java.sql.Date;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+
+import domain.Student;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -8,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -15,9 +21,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import logic.StudentHandler;
 
 public class StudentView {
-    public void studentView(Stage stage, MainView mainView) {
+    private StudentHandler studentHandler;
+
+    public void studentView(Stage stage, MainView mainView, StudentHandler studentHandler) {
+        this.studentHandler = studentHandler;
         BorderPane borderpane = new BorderPane();
         VBox vbox = new VBox();
         vbox.setSpacing(14);
@@ -31,7 +41,6 @@ public class StudentView {
             mainView.mainView(stage);
         });
 
-        // crud options
         RadioButton radioButton1 = new RadioButton("Create a student");
         ToggleGroup toggleGroup = new ToggleGroup();
         radioButton1.setToggleGroup(toggleGroup);
@@ -54,7 +63,6 @@ public class StudentView {
         TextArea textArea = new TextArea();
         textArea.setEditable(false);
 
-        // Create the input fields
         TextField emailField = new TextField();
         TextField nameField = new TextField();
         DatePicker birthDateField = new DatePicker();
@@ -64,12 +72,78 @@ public class StudentView {
         TextField countryField = new TextField();
         TextField zipCodeField = new TextField();
 
+        radioButton1.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            emailField.setDisable(false);
+            nameField.setDisable(false);
+            birthDateField.setDisable(false);
+            genderField.setDisable(false);
+            addressField.setDisable(false);
+            cityField.setDisable(false);
+            countryField.setDisable(false);
+            zipCodeField.setDisable(false);
+        });
+
+        radioButton2.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            emailField.setDisable(true);
+            nameField.setDisable(true);
+            birthDateField.setDisable(true);
+            genderField.setDisable(true);
+            addressField.setDisable(true);
+            cityField.setDisable(true);
+            countryField.setDisable(true);
+            zipCodeField.setDisable(true);
+        });
+
+        radioButton3.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            emailField.setDisable(false);
+            nameField.setDisable(false);
+            birthDateField.setDisable(false);
+            genderField.setDisable(false);
+            addressField.setDisable(false);
+            cityField.setDisable(false);
+            countryField.setDisable(false);
+            zipCodeField.setDisable(false);
+        });
+
+        radioButton4.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            emailField.setDisable(false);
+            nameField.setDisable(true);
+            birthDateField.setDisable(true);
+            genderField.setDisable(true);
+            addressField.setDisable(true);
+            cityField.setDisable(true);
+            countryField.setDisable(true);
+            zipCodeField.setDisable(true);
+        });
+
         Button clear = new Button("Clear fields");
         clear.setOnAction((event) -> {
             clearInputFields(emailField, nameField, birthDateField, genderField, addressField, cityField, countryField,
                     zipCodeField);
         });
 
+        Button submit = new Button("Submit");
+        submit.setOnAction(e -> {
+            Toggle selectedToggle = toggleGroup.getSelectedToggle();
+
+            RadioButton selectedRadioButton = (RadioButton) selectedToggle;
+            String selectedText = selectedRadioButton.getText();
+            if (selectedText.equals("Create a student")) {
+                try {
+                    createStudent(emailField, nameField, birthDateField, genderField, addressField, cityField,
+                            countryField,
+                            zipCodeField, studentHandler);
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+            } else if (selectedText.equals("Get all students")) {
+                readStudents();
+            } else if (selectedText.equals("Update a student")) {
+                updateStudent();
+            } else if (selectedText.equals("Delete a student")) {
+                deleteStudent();
+            }
+        });
         // Create the labels
         Label emailLabel = new Label("Email:");
         Label nameLabel = new Label("Name:");
@@ -80,9 +154,14 @@ public class StudentView {
         Label countryLabel = new Label("Country:");
         Label zipCodeLabel = new Label("Zipcode:");
 
-        HBox toMainViewAndClear = new HBox();
-        toMainViewAndClear.getChildren().addAll(toMainView, clear);
+        HBox SubmitAndClear = new HBox();
+        SubmitAndClear.getChildren().addAll(submit, clear);
 
+        VBox SubmitClearMainView = new VBox();
+        SubmitClearMainView.getChildren().addAll(SubmitAndClear, toMainView);
+
+        SubmitAndClear.setPadding(new Insets(10, 0, 10, 0));
+        SubmitAndClear.setSpacing(10);
         // Create the grid pane and add the input fields and labels to it
         GridPane inputFields = new GridPane();
         inputFields.setPadding(new Insets(10));
@@ -97,7 +176,7 @@ public class StudentView {
         inputFields.addRow(5, cityLabel, cityField);
         inputFields.addRow(6, countryLabel, countryField);
         inputFields.addRow(7, zipCodeLabel, zipCodeField);
-        inputFields.addRow(8, toMainViewAndClear);
+        inputFields.addRow(8, SubmitClearMainView);
 
         vbox.getChildren().addAll(label1, crudOptions);
         borderpane.setTop(vbox);
@@ -105,7 +184,7 @@ public class StudentView {
         borderpane.setRight(textArea);
         borderpane.setPadding(new Insets(10));
 
-        Scene studentView = new Scene(borderpane, 650, 430);
+        Scene studentView = new Scene(borderpane, 650, 480);
         stage.setScene(studentView);
         stage.show();
 
@@ -122,5 +201,37 @@ public class StudentView {
         cityField.setText(null);
         countryField.setText(null);
         zipCodeField.setText(null);
+    }
+
+    public void createStudent(TextField emailField, TextField nameField, DatePicker birthDateField,
+            TextField genderField, TextField addressField, TextField cityField, TextField countryField,
+            TextField zipCodeField, StudentHandler studentHandler) throws SQLException {
+        String email = emailField.getText();
+        String name = nameField.getText();
+        Date birthDate = Date.valueOf(birthDateField.getValue());
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String dateString = formatter.format(birthDate);
+
+        String gender = genderField.getText();
+        String address = addressField.getText();
+        String city = cityField.getText();
+        String country = countryField.getText();
+        String zipCode = zipCodeField.getText();
+
+        Student student = new Student(email, name, dateString, gender, address, city, country, zipCode);
+        studentHandler.addStudent(student);
+
+    }
+
+    public void readStudents() {
+
+    }
+
+    public void updateStudent() {
+
+    }
+
+    public void deleteStudent() {
+
     }
 }
