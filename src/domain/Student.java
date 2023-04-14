@@ -4,6 +4,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Student {
 
     private String email;
@@ -64,6 +68,10 @@ public class Student {
             throw new IllegalArgumentException("Invalid email address format.");
         }
 
+        if (!isValidEmail(email)) {
+            throw new IllegalArgumentException("Invalid email address format.");
+        }
+
         this.email = email;
     }
 
@@ -72,6 +80,10 @@ public class Student {
     }
 
     public void setBirthDate(String birthDate) {
+        if (!isValidBirthDate(birthDate)) {
+            throw new IllegalArgumentException("Invalid birth date.");
+        }
+
         if (!isValidBirthDate(birthDate)) {
             throw new IllegalArgumentException("Invalid birth date.");
         }
@@ -96,6 +108,10 @@ public class Student {
     }
 
     public void setZipCode(String zipCode) {
+        if (!isValidZipCode(zipCode)) {
+            throw new IllegalArgumentException("Invalid zip code format.");
+        }
+
         if (!isValidZipCode(zipCode)) {
             throw new IllegalArgumentException("Invalid zip code format.");
         }
