@@ -132,9 +132,7 @@ public class CertificateView {
         inputFields.addRow(2, employeeLabel, employeeField);
         inputFields.addRow(8, SubmitClearMainView);
 
-
-
-
+        
         vbox.getChildren().addAll(label1, crudOptions);
         borderpane.setTop(vbox);
         borderpane.setLeft(inputFields);
