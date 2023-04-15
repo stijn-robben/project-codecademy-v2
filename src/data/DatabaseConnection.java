@@ -13,10 +13,17 @@ public class DatabaseConnection {
     }
 
     public Connection getConnection() throws SQLException {
-        if (connection == null || connection.isClosed()) {
-            connection = DriverManager.getConnection(connectionUrl);
+        try {
+
+            if (connection == null || connection.isClosed()) {
+                connection = DriverManager.getConnection(connectionUrl);
+            }
+            
+        } catch(SQLException e) {
+            System.out.println("Database connection failed");
         }
         return connection;
+
     }
 
     public void closeConnection() throws SQLException {
