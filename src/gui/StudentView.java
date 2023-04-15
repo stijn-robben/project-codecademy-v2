@@ -3,6 +3,7 @@ package gui;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import domain.Student;
 import javafx.geometry.Insets;
@@ -24,10 +25,7 @@ import javafx.stage.Stage;
 import logic.StudentHandler;
 
 public class StudentView {
-    private StudentHandler studentHandler;
-
     public void studentView(Stage stage, MainView mainView, StudentHandler studentHandler) {
-        this.studentHandler = studentHandler;
         BorderPane borderpane = new BorderPane();
         VBox vbox = new VBox();
         vbox.setSpacing(14);
@@ -81,6 +79,8 @@ public class StudentView {
             cityField.setDisable(false);
             countryField.setDisable(false);
             zipCodeField.setDisable(false);
+            clearInputFields(emailField, nameField, birthDateField, genderField, addressField, cityField, countryField,
+                    zipCodeField, textArea);
         });
 
         radioButton2.selectedProperty().addListener((observable, oldValue, newValue) -> {
@@ -92,6 +92,8 @@ public class StudentView {
             cityField.setDisable(true);
             countryField.setDisable(true);
             zipCodeField.setDisable(true);
+            clearInputFields(emailField, nameField, birthDateField, genderField, addressField, cityField, countryField,
+                    zipCodeField, textArea);
         });
 
         radioButton3.selectedProperty().addListener((observable, oldValue, newValue) -> {
@@ -103,6 +105,8 @@ public class StudentView {
             cityField.setDisable(false);
             countryField.setDisable(false);
             zipCodeField.setDisable(false);
+            clearInputFields(emailField, nameField, birthDateField, genderField, addressField, cityField, countryField,
+                    zipCodeField, textArea);
         });
 
         radioButton4.selectedProperty().addListener((observable, oldValue, newValue) -> {
@@ -114,12 +118,14 @@ public class StudentView {
             cityField.setDisable(true);
             countryField.setDisable(true);
             zipCodeField.setDisable(true);
+            clearInputFields(emailField, nameField, birthDateField, genderField, addressField, cityField, countryField,
+                    zipCodeField, textArea);
         });
 
         Button clear = new Button("Clear fields");
         clear.setOnAction((event) -> {
             clearInputFields(emailField, nameField, birthDateField, genderField, addressField, cityField, countryField,
-                    zipCodeField);
+                    zipCodeField, textArea);
         });
 
         Button submit = new Button("Submit");
@@ -132,12 +138,16 @@ public class StudentView {
                 try {
                     createStudent(emailField, nameField, birthDateField, genderField, addressField, cityField,
                             countryField,
-                            zipCodeField, studentHandler);
+                            zipCodeField, studentHandler, textArea);
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }
             } else if (selectedText.equals("Get all students")) {
-                readStudents();
+                try {
+                    readStudents(studentHandler, textArea);
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
             } else if (selectedText.equals("Update a student")) {
                 updateStudent();
             } else if (selectedText.equals("Delete a student")) {
@@ -192,7 +202,7 @@ public class StudentView {
 
     public void clearInputFields(TextField emailField, TextField nameField, DatePicker birthDateField,
             TextField genderField, TextField addressField, TextField cityField, TextField countryField,
-            TextField zipCodeField) {
+            TextField zipCodeField, TextArea textArea) {
         emailField.setText(null);
         nameField.setText(null);
         birthDateField.setValue(null);
@@ -201,11 +211,12 @@ public class StudentView {
         cityField.setText(null);
         countryField.setText(null);
         zipCodeField.setText(null);
+        textArea.setText(null);
     }
 
     public void createStudent(TextField emailField, TextField nameField, DatePicker birthDateField,
             TextField genderField, TextField addressField, TextField cityField, TextField countryField,
-            TextField zipCodeField, StudentHandler studentHandler) throws SQLException {
+            TextField zipCodeField, StudentHandler studentHandler, TextArea textArea) throws SQLException {
         String email = emailField.getText();
         String name = nameField.getText();
         Date birthDate = Date.valueOf(birthDateField.getValue());
@@ -220,11 +231,17 @@ public class StudentView {
 
         Student student = new Student(email, name, dateString, gender, address, city, country, zipCode);
         studentHandler.addStudent(student);
-
+        textArea.setText("Student is now in the database!");
     }
 
-    public void readStudents() {
-
+    public void readStudents(StudentHandler studentHandler, TextArea textArea) throws SQLException {
+        List<Student> studentList = studentHandler.getStudents();
+        String output = "";
+        for (int i = 0; i < studentList.size(); i++) {
+            output += studentList.get(i).toString();
+            output += "\n";
+        }
+        textArea.setText(output);
     }
 
     public void updateStudent() {

@@ -4,10 +4,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 public class Student {
 
     private String email;
@@ -153,8 +149,8 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student [email=" + email + ", name=" + name + ", birthDate=" + birthDate + ", gender=" + gender
-                + ", address=" + address + ", city=" + city + ", country=" + country + ", zipCode=" + zipCode + "]";
+        return "" + email + ", " + name + ", " + birthDate + ", " + gender
+                + ", " + address + ", " + city + ", " + country + ", " + zipCode + "";
     }
 
 }

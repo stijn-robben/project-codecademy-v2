@@ -33,6 +33,7 @@ public class CourseRepository {
             String id = resultSet.getString("Id");
             String name = resultSet.getString("CourseName");
             String subject = resultSet.getString("Subject");
+            // TO DO: enum toevoegen voor level: Beginner, Advanced, Hard
             String level = resultSet.getString("Level");
             String introText = resultSet.getString("IntroductionText");
             courses.add(new Course(id, name, subject, level, introText));
@@ -42,16 +43,16 @@ public class CourseRepository {
         return courses;
     }
 
-    public void deleteCourse(String courseName) throws SQLException {
-        String query = "DELETE FROM Course WHERE CourseName = ?";
+    public void deleteCourse(String courseID) throws SQLException {
+        String query = "DELETE FROM Course WHERE CourseID = ?";
         PreparedStatement statement = connection.prepareStatement(query);
-        statement.setString(1, courseName);
+        statement.setString(1, courseID);
         statement.executeUpdate();
         statement.close();
     }
 
     public void updateCourse(Course course) throws SQLException {
-        String query = "UPDATE Course SET CourseName=?, Subject=?, IntroductionText=?, Level=? WHERE Id=?";
+        String query = "UPDATE Course SET CourseName=?, Subject=?, IntroductionText=?, Level=? WHERE CourseID=?";
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setString(1, course.getName());
         statement.setString(2, course.getSubject());
