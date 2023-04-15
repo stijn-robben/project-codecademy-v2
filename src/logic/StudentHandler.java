@@ -9,7 +9,7 @@ public class StudentHandler {
     private final StudentRepository studentRepository;
 
     public StudentHandler(Connection connection) {
-        this.studentRepository = new StudentRepository(connection);
+        this.studentRepository = new StudentRepository();
     }
 
     public void addStudent(Student student) throws SQLException {

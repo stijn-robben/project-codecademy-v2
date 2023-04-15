@@ -7,8 +7,8 @@ public class Certificate {
     private String approvingEmployeeName;
     private Enrollment enrollment;
 
-    public Certificate(String certificateID, double grade, String approvingEmployeeName, Enrollment enrollment) {
-        this.certificateID = certificateID;
+    public Certificate(double grade, String approvingEmployeeName, Enrollment enrollment) {
+        //this.certificateID = certificateID;
         this.grade = grade;
         this.approvingEmployeeName = approvingEmployeeName;
         this.enrollment = enrollment;

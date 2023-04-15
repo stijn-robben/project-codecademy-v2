@@ -94,6 +94,7 @@ public class EnrollmentView {
             RadioButton selectedRadioButton = (RadioButton) selectedToggle;
             String selectedText = selectedRadioButton.getText();
             if (selectedText.equals("Create an Enrollment")) {
+                
             } else if (selectedText.equals("Get all Enrollments")) {
             } else if (selectedText.equals("Update an Enrollment")) {
 

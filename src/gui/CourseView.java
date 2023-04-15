@@ -121,7 +121,6 @@ public class CourseView {
             clearInputFields(courseNameTextField, subjectTextField, levelBox, textArea);
         });
 
-        //////// not working yet
         Button submit = new Button("Submit");
         submit.setOnAction(e -> {
             Toggle selectedToggle = toggleGroup.getSelectedToggle();
@@ -150,11 +149,13 @@ public class CourseView {
                 }
 
             } else if (selectedText.equals("Delete a Course")) {
-
+                try {
+                    deleteCourse(courseNameTextField, courseHandler, textArea);
+                } catch (Exception err) {
+                    err.printStackTrace();
+                }
             }
         });
-
-        ////////////////////////////////
 
         
         Label courseNamLabel = new Label("Course Name:");
@@ -193,6 +194,8 @@ public class CourseView {
         stage.setScene(courseView);
         stage.show();
     }
+
+   
 
     private void clearInputFields(TextField courseNameTextField, TextField subjectTextField, ChoiceBox<String> level,
             TextArea textArea) {
@@ -236,6 +239,14 @@ public class CourseView {
 
         Course updateCourse = new Course(courseName, subject, levelValue, introText);
         courseHandler.updateCourse(updateCourse, originalCourseName);
+        textArea.setText("Course is updated");
     }
 
+    private void deleteCourse(TextField courseNameTextField, CourseHandler courseHandler, TextArea textArea) throws SQLException {
+        String courseName = courseNameTextField.getText();
+        courseHandler.deleteCourse(courseName);
+        textArea.setText("Course has been deleted");
+
+        
+    }
 }

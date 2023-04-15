@@ -11,7 +11,7 @@ public class CourseHandler {
     private final CourseRepository courseRepository;
 
     public CourseHandler(Connection connection) {
-        this.courseRepository = new CourseRepository(connection);
+        this.courseRepository = new CourseRepository();
     }
 
     public void addCourse(Course course) throws SQLException {
