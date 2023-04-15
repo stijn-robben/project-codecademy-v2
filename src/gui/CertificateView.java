@@ -68,9 +68,9 @@ public class CertificateView {
         });
 
         radioButton2.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            emailField.setDisable(false);
-            gradeField.setDisable(false);
-            employeeField.setDisable(false);
+            emailField.setDisable(true);
+            gradeField.setDisable(true);
+            employeeField.setDisable(true);
             clearInputFields(emailField, gradeField, employeeField, textArea);
         });
 
@@ -83,8 +83,8 @@ public class CertificateView {
 
         radioButton4.selectedProperty().addListener((observable, oldValue, newValue) -> {
             emailField.setDisable(false);
-            gradeField.setDisable(false);
-            employeeField.setDisable(false);
+            gradeField.setDisable(true);
+            employeeField.setDisable(true);
             clearInputFields(emailField, gradeField, employeeField, textArea);
         });
 

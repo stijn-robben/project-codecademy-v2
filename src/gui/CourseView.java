@@ -71,24 +71,33 @@ public class CourseView {
         radioButton1.selectedProperty().addListener((observable, oldValue, newValue) -> {
             courseNameTextField.setDisable(false);
             subjectTextField.setDisable(false);
+            level.setDisable(false);
+            introductionTextTextArea.setDisable(false);
+            
             clearInputFields(courseNameTextField, subjectTextField, level, textArea);
         });
 
         radioButton2.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            courseNameTextField.setDisable(false);
-            subjectTextField.setDisable(false);
+            courseNameTextField.setDisable(true);
+            subjectTextField.setDisable(true);
+            level.setDisable(true);
+            introductionTextTextArea.setDisable(true);
             clearInputFields(courseNameTextField, subjectTextField, level, textArea);
         });
 
         radioButton3.selectedProperty().addListener((observable, oldValue, newValue) -> {
             courseNameTextField.setDisable(false);
             subjectTextField.setDisable(false);
+            level.setDisable(false);
+            introductionTextTextArea.setDisable(false);
             clearInputFields(courseNameTextField, subjectTextField, level, textArea);
         });
 
         radioButton4.selectedProperty().addListener((observable, oldValue, newValue) -> {
             courseNameTextField.setDisable(false);
-            subjectTextField.setDisable(false);
+            subjectTextField.setDisable(true);
+            level.setDisable(true);
+            introductionTextTextArea.setDisable(true);
             clearInputFields(courseNameTextField, subjectTextField, level, textArea);
         });
 

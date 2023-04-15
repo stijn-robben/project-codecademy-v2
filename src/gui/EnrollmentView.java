@@ -40,10 +40,10 @@ public class EnrollmentView {
         RadioButton radioButton2 = new RadioButton("Get all Enrollments");
         radioButton2.setToggleGroup(toggleGroup);
 
-        RadioButton radioButton3 = new RadioButton("Update a Enrollment");
+        RadioButton radioButton3 = new RadioButton("Update an Enrollment");
         radioButton3.setToggleGroup(toggleGroup);
 
-        RadioButton radioButton4 = new RadioButton("Delete a Enrollment");
+        RadioButton radioButton4 = new RadioButton("Delete an Enrollment");
         radioButton4.setToggleGroup(toggleGroup);
 
         HBox crudOptions = new HBox();
@@ -64,8 +64,8 @@ public class EnrollmentView {
         });
 
         radioButton2.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            emailField.setDisable(false);
-            registrationDate.setDisable(false);
+            emailField.setDisable(true);
+            registrationDate.setDisable(true);
             clearInputFields(emailField, registrationDate, textArea);
         });
 
@@ -77,7 +77,7 @@ public class EnrollmentView {
 
         radioButton4.selectedProperty().addListener((observable, oldValue, newValue) -> {
             emailField.setDisable(false);
-            registrationDate.setDisable(false);
+            registrationDate.setDisable(true);
             clearInputFields(emailField, registrationDate, textArea);
         });
 
@@ -95,9 +95,9 @@ public class EnrollmentView {
             String selectedText = selectedRadioButton.getText();
             if (selectedText.equals("Create an Enrollment")) {
             } else if (selectedText.equals("Get all Enrollments")) {
-            } else if (selectedText.equals("Update a Enrollment")) {
+            } else if (selectedText.equals("Update an Enrollment")) {
 
-            } else if (selectedText.equals("Delete a Enrollment")) {
+            } else if (selectedText.equals("Delete an Enrollment")) {
 
             }
         });
