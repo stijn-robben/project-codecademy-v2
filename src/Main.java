@@ -22,8 +22,8 @@ public class Main extends Application {
         EnrollmentView enrollementView = new EnrollmentView();
         CourseView courseView = new CourseView();
         CertificateView certificateView = new CertificateView();
-        DatabaseConnection connection = new DatabaseConnection();
-        StudentHandler studentHandler = new StudentHandler(connection.getConnection());
+        //DatabaseConnection connection = new DatabaseConnection();
+        StudentHandler studentHandler = new StudentHandler(DatabaseConnection.getConnection());
 
         MainView mainView = new MainView();
         mainView.setStudentView(studentView);

@@ -5,24 +5,25 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnection {
-    private String connectionUrl = "jdbc:sqlserver://localhost;databaseName=Codecademy;integratedSecurity=true;encrypt=true;";
+    private static String connectionUrl = "jdbc:sqlserver://localhost;databaseName=Codecademy;integratedSecurity=true;encrypt=true;";
     private Connection connection;
+    private static final String SQLDriver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 
-    public DatabaseConnection() throws ClassNotFoundException {
-        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-    }
+    // public DatabaseConnection() throws ClassNotFoundException {
+    //     Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+    // }
 
-    public Connection getConnection() throws SQLException {
+    public static Connection getConnection() throws SQLException {
+
         try {
-
-            if (connection == null || connection.isClosed()) {
-                connection = DriverManager.getConnection(connectionUrl);
-            }
-            
-        } catch(SQLException e) {
+            Class.forName(SQLDriver);
+            Connection connect = DriverManager.getConnection(connectionUrl);
+            return connect;
+        } catch (Exception e) {
             System.out.println("Database connection failed");
+            e.printStackTrace();
+            return null;
         }
-        return connection;
 
     }
 

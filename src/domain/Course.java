@@ -8,8 +8,7 @@ public class Course {
     private String level;
     private String introText;
 
-    public Course(String id, String name, String subject, String level, String introText) {
-        this.id = id;
+    public Course(String name, String subject, String level, String introText) {
         this.name = name;
         this.subject = subject;
         this.level = level;
@@ -17,7 +16,7 @@ public class Course {
     }
 
     public String getId() {
-        return id;
+        return id;  // can be removed because db gives auto id?
     }
 
     public String getName() {
@@ -29,7 +28,7 @@ public class Course {
     }
 
     public String getLevel() {
-        return level;
+        return this.level.toString();
     }
 
     public String getIntroText() {
