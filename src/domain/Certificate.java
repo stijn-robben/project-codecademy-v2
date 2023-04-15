@@ -2,24 +2,32 @@ package domain;
 
 public class Certificate {
 
-    private String id;
-    private double grade;
+    private String certificateID;
+    private Double grade;
     private String approvingEmployeeName;
     private Enrollment enrollment;
 
-    public Certificate(String id, double grade, String approvingEmployeeName, Enrollment enrollment) {
-        this.id = id;
+    public Certificate(String certificateID, double grade, String approvingEmployeeName, Enrollment enrollment) {
+        this.certificateID = certificateID;
         this.grade = grade;
         this.approvingEmployeeName = approvingEmployeeName;
         this.enrollment = enrollment;
     }
 
-    public String getId() {
-        return id;
+    public String getCertificateID() {
+        return certificateID;
+    }
+
+    public String getCourseID() {
+        return enrollment.getCourse().getId();
     }
 
     public double getGrade() {
         return grade;
+    }
+
+    public String getGradeInString() {
+        return grade.toString();
     }
 
     public String getApprovingEmployeeName() {
@@ -28,6 +36,14 @@ public class Certificate {
 
     public Enrollment getEnrollment() {
         return enrollment;
+    }
+
+    public String getStudentEmail() {
+        return enrollment.getStudent().getEmail();
+    }
+
+    public String getRegistrationDate() {
+        return enrollment.getEnrollmentDate();
     }
 
     
