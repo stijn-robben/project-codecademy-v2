@@ -93,6 +93,7 @@ public class CertificateView {
             clearInputFields(emailField, gradeField, employeeField, textArea);
         });
 
+        //////// not working yet
         Button submit = new Button("Submit");
         submit.setOnAction(e -> {
             Toggle selectedToggle = toggleGroup.getSelectedToggle();
@@ -107,6 +108,9 @@ public class CertificateView {
 
             }
         });
+
+
+        ////////////////////////////////
 
         // Create the labels
         Label emailLabel = new Label("Email:");
@@ -132,7 +136,7 @@ public class CertificateView {
         inputFields.addRow(2, employeeLabel, employeeField);
         inputFields.addRow(8, SubmitClearMainView);
 
-        
+
         vbox.getChildren().addAll(label1, crudOptions);
         borderpane.setTop(vbox);
         borderpane.setLeft(inputFields);

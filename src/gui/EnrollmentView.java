@@ -22,11 +22,11 @@ public class EnrollmentView {
         BorderPane borderpane = new BorderPane();
         VBox vbox = new VBox();
         vbox.setSpacing(14);
-        vbox.setPadding(new Insets(8)); 
-        
+        vbox.setPadding(new Insets(8));
+
         Label label1 = new Label("Enrollments");
         label1.setFont(Font.font("Arial", 16));
-        
+
         Button toMainView = new Button("Back to home");
         toMainView.setOnAction((event) -> {
             mainView.mainView(stage);
@@ -56,7 +56,6 @@ public class EnrollmentView {
 
         TextField emailField = new TextField();
         DatePicker registrationDate = new DatePicker();
-        
 
         radioButton1.selectedProperty().addListener((observable, oldValue, newValue) -> {
             emailField.setDisable(false);
@@ -91,7 +90,7 @@ public class EnrollmentView {
         submit.setOnAction(e -> {
             Toggle selectedToggle = toggleGroup.getSelectedToggle();
 
-            // not working yet
+            // not working yet need to be added//////////////////////
             RadioButton selectedRadioButton = (RadioButton) selectedToggle;
             String selectedText = selectedRadioButton.getText();
             if (selectedText.equals("Create an Enrollment")) {
@@ -102,6 +101,9 @@ public class EnrollmentView {
 
             }
         });
+
+/////////////////////////////
+
 
         Label emaiLabel = new Label("Email");
         Label dateLabel = new Label("Date");
@@ -124,9 +126,6 @@ public class EnrollmentView {
         inputFields.addRow(1, dateLabel, registrationDate);
         inputFields.addRow(8, SubmitClearMainView);
 
-
-
-        
         vbox.getChildren().addAll(label1, crudOptions);
         borderpane.setTop(vbox);
         borderpane.setLeft(inputFields);
@@ -142,7 +141,6 @@ public class EnrollmentView {
         emailField.setText(null);
         textArea.setText(null);
         registrationDate.setValue(null);
- 
 
     }
 }
