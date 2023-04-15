@@ -149,9 +149,21 @@ public class StudentView {
                     e1.printStackTrace();
                 }
             } else if (selectedText.equals("Update a student")) {
-                updateStudent();
+                try {
+                    updateStudent(emailField, nameField, birthDateField, genderField, addressField, cityField,
+                            countryField,
+                            zipCodeField, studentHandler, textArea);
+                } catch (SQLException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
             } else if (selectedText.equals("Delete a student")) {
-                deleteStudent();
+                try {
+                    deleteStudent(emailField, studentHandler, textArea);
+                } catch (SQLException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
             }
         });
         // Create the labels
@@ -244,11 +256,30 @@ public class StudentView {
         textArea.setText(output);
     }
 
-    public void updateStudent() {
+    public void updateStudent(TextField emailField, TextField nameField, DatePicker birthDateField,
+            TextField genderField, TextField addressField, TextField cityField, TextField countryField,
+            TextField zipCodeField, StudentHandler studentHandler, TextArea textArea) throws SQLException {
+        String email = emailField.getText();
+        String name = nameField.getText();
+        Date birthDate = Date.valueOf(birthDateField.getValue());
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String dateString = formatter.format(birthDate);
 
+        String gender = genderField.getText();
+        String address = addressField.getText();
+        String city = cityField.getText();
+        String country = countryField.getText();
+        String zipCode = zipCodeField.getText();
+
+        Student student = new Student(email, name, dateString, gender, address, city, country, zipCode);
+        studentHandler.updateStudent(student);
+        textArea.setText("Student is updated!");
     }
 
-    public void deleteStudent() {
-
+    public void deleteStudent(TextField emailField, StudentHandler studentHandler, TextArea textArea)
+            throws SQLException {
+        String email = emailField.getText();
+        studentHandler.deleteStudent(email);
+        textArea.setText("Student is deleted!");
     }
 }

@@ -1,5 +1,12 @@
 package gui;
 
+import java.sql.Date;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.List;
+
+import domain.Enrollment;
+import domain.Student;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -16,9 +23,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import logic.EnrollmentHandler;
+import logic.StudentHandler;
 
 public class EnrollmentView {
-    public void enrollmentView(Stage stage, MainView mainView) {
+    public void enrollmentView(Stage stage, MainView mainView, EnrollmentHandler enrollmentHandler) {
         BorderPane borderpane = new BorderPane();
         VBox vbox = new VBox();
         vbox.setSpacing(14);
@@ -32,18 +41,18 @@ public class EnrollmentView {
             mainView.mainView(stage);
         });
 
-        RadioButton radioButton1 = new RadioButton("Create an Enrollment");
+        RadioButton radioButton1 = new RadioButton("Create an enrollment");
         ToggleGroup toggleGroup = new ToggleGroup();
         radioButton1.setToggleGroup(toggleGroup);
         radioButton1.setSelected(true);
 
-        RadioButton radioButton2 = new RadioButton("Get all Enrollments");
+        RadioButton radioButton2 = new RadioButton("Get all enrollments");
         radioButton2.setToggleGroup(toggleGroup);
 
-        RadioButton radioButton3 = new RadioButton("Update an Enrollment");
+        RadioButton radioButton3 = new RadioButton("Update an enrollment");
         radioButton3.setToggleGroup(toggleGroup);
 
-        RadioButton radioButton4 = new RadioButton("Delete an Enrollment");
+        RadioButton radioButton4 = new RadioButton("Delete an enrollment");
         radioButton4.setToggleGroup(toggleGroup);
 
         HBox crudOptions = new HBox();
@@ -54,60 +63,84 @@ public class EnrollmentView {
         TextArea textArea = new TextArea();
         textArea.setEditable(false);
 
-        TextField emailField = new TextField();
         DatePicker registrationDate = new DatePicker();
+        TextField emailField = new TextField();
+        TextField courseIdField = new TextField();
 
         radioButton1.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            emailField.setDisable(false);
             registrationDate.setDisable(false);
-            clearInputFields(emailField, registrationDate, textArea);
+            emailField.setDisable(false);
+            courseIdField.setDisable(false);
+            clearInputFields(registrationDate, emailField, courseIdField, textArea);
         });
 
         radioButton2.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            emailField.setDisable(true);
             registrationDate.setDisable(true);
-            clearInputFields(emailField, registrationDate, textArea);
+            emailField.setDisable(true);
+            courseIdField.setDisable(true);
+            clearInputFields(registrationDate, emailField, courseIdField, textArea);
         });
 
         radioButton3.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            emailField.setDisable(false);
             registrationDate.setDisable(false);
-            clearInputFields(emailField, registrationDate, textArea);
+            emailField.setDisable(false);
+            courseIdField.setDisable(false);
+            clearInputFields(registrationDate, emailField, courseIdField, textArea);
         });
 
         radioButton4.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            emailField.setDisable(false);
             registrationDate.setDisable(true);
-            clearInputFields(emailField, registrationDate, textArea);
+            emailField.setDisable(false);
+            courseIdField.setDisable(false);
+            clearInputFields(registrationDate, emailField, courseIdField, textArea);
         });
 
         Button clear = new Button("Clear fields");
         clear.setOnAction((event) -> {
-            clearInputFields(emailField, registrationDate, textArea);
+            clearInputFields(registrationDate, emailField, courseIdField, textArea);
         });
 
         Button submit = new Button("Submit");
         submit.setOnAction(e -> {
             Toggle selectedToggle = toggleGroup.getSelectedToggle();
 
-            // not working yet need to be added//////////////////////
             RadioButton selectedRadioButton = (RadioButton) selectedToggle;
             String selectedText = selectedRadioButton.getText();
-            if (selectedText.equals("Create an Enrollment")) {
-                
-            } else if (selectedText.equals("Get all Enrollments")) {
-            } else if (selectedText.equals("Update an Enrollment")) {
+            if (selectedText.equals("Create an enrollment")) {
 
-            } else if (selectedText.equals("Delete an Enrollment")) {
+                try {
+                    createEnrollment(registrationDate, emailField, courseIdField, textArea, enrollmentHandler);
+                } catch (SQLException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
 
+            } else if (selectedText.equals("Get all enrollments")) {
+                try {
+                    readEnrollment(enrollmentHandler, textArea);
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+            } else if (selectedText.equals("Update an enrollment")) {
+                try {
+                    updateEnrollment(registrationDate, emailField, courseIdField, textArea, enrollmentHandler);
+                } catch (SQLException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+            } else if (selectedText.equals("Delete an enrollment")) {
+                try {
+                    deleteEnrollment(emailField, courseIdField, textArea, enrollmentHandler);
+                } catch (SQLException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
             }
         });
-
-/////////////////////////////
-
-
-        Label emaiLabel = new Label("Email");
-        Label dateLabel = new Label("Date");
+        // Create the labels
+        Label dateLabel = new Label("Registration date:");
+        Label emailLabel = new Label("Student email:");
+        Label courseIdLabel = new Label("Course ID:");
 
         HBox SubmitAndClear = new HBox();
         SubmitAndClear.getChildren().addAll(submit, clear);
@@ -123,9 +156,11 @@ public class EnrollmentView {
         inputFields.setHgap(10);
         inputFields.setVgap(10);
 
-        inputFields.addRow(0, emaiLabel, emailField);
-        inputFields.addRow(1, dateLabel, registrationDate);
-        inputFields.addRow(8, SubmitClearMainView);
+        inputFields.addRow(0, emailLabel, emailField);
+        inputFields.addRow(1, courseIdLabel, courseIdField);
+        inputFields.addRow(2, dateLabel, registrationDate);
+
+        inputFields.addRow(3, SubmitClearMainView);
 
         vbox.getChildren().addAll(label1, crudOptions);
         borderpane.setTop(vbox);
@@ -133,15 +168,63 @@ public class EnrollmentView {
         borderpane.setRight(textArea);
         borderpane.setPadding(new Insets(10));
 
-        Scene enrollmentView = new Scene(borderpane, 600, 400);
-        stage.setScene(enrollmentView);
+        Scene studentView = new Scene(borderpane, 650, 480);
+        stage.setScene(studentView);
         stage.show();
+
     }
 
-    private void clearInputFields(TextField emailField, DatePicker registrationDate, TextArea textArea) {
-        emailField.setText(null);
-        textArea.setText(null);
+    private void clearInputFields(DatePicker registrationDate, TextField emailField, TextField courseIdField,
+            TextArea textArea) {
         registrationDate.setValue(null);
+        emailField.setText(null);
+        courseIdField.setText(null);
+        textArea.setText(null);
+    }
+
+    private void createEnrollment(DatePicker registrationDate, TextField emailField, TextField courseIdField,
+            TextArea textArea, EnrollmentHandler enrollmentHandler) throws SQLException {
+        Date date = Date.valueOf(registrationDate.getValue());
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String dateString = formatter.format(date);
+        String email = emailField.getText();
+        int courseId = Integer.valueOf(courseIdField.getText());
+
+        Enrollment enrollment = new Enrollment(dateString, email, courseId);
+        enrollmentHandler.addEnrollment(enrollment);
+        textArea.setText("Enrollment is now in the database!");
+    }
+
+    public void readEnrollment(EnrollmentHandler enrollmentHandler, TextArea textArea) throws SQLException {
+        List<Enrollment> enrollmentList = enrollmentHandler.getEnrollments();
+        String output = "";
+        for (int i = 0; i < enrollmentList.size(); i++) {
+            output += enrollmentList.get(i).toString();
+            output += "\n";
+        }
+        textArea.setText(output);
+    }
+
+    public void updateEnrollment(DatePicker registrationDate, TextField emailField, TextField courseIdField,
+            TextArea textArea, EnrollmentHandler enrollmentHandler) throws SQLException {
+        Date date = Date.valueOf(registrationDate.getValue());
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String dateString = formatter.format(date);
+        String email = emailField.getText();
+        int courseId = Integer.valueOf(courseIdField.getText());
+
+        Enrollment enrollment = new Enrollment(dateString, email, courseId);
+        enrollmentHandler.updateEnrollment(enrollment);
+        textArea.setText("Enrollment is updated in the database!");
+    }
+
+    public void deleteEnrollment(TextField emailField, TextField courseIdField,
+            TextArea textArea, EnrollmentHandler enrollmentHandler) throws SQLException {
+
+        String email = emailField.getText();
+        int courseId = Integer.valueOf(courseIdField.getText());
+        enrollmentHandler.deleteEnrollment(email, courseId);
+        textArea.setText("Enrollment is deleted in the database!");
 
     }
 }

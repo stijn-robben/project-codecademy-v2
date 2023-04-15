@@ -9,6 +9,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import logic.CourseHandler;
+import logic.EnrollmentHandler;
 import logic.StudentHandler;
 
 public class MainView {
@@ -19,6 +20,7 @@ public class MainView {
     private CertificateView certificateView;
     private StudentHandler studentHandler;
     private CourseHandler courseHandler;
+    private EnrollmentHandler enrollmentHandler;
 
     public void mainView(Stage stage) {
         VBox vbox = new VBox();
@@ -49,7 +51,7 @@ public class MainView {
         // Actions
         button1.setOnAction(e -> studentView.studentView(stage, this, studentHandler));
         button2.setOnAction(e -> courseView.courseView(stage, this, courseHandler));
-        button3.setOnAction(e -> enrollementView.enrollmentView(stage, this));
+        button3.setOnAction(e -> enrollementView.enrollmentView(stage, this, enrollmentHandler));
         button4.setOnAction(e -> certificateView.certificateView(stage, this));
         button5.setOnAction(e -> overviewView.overviewView(stage, this));
 
@@ -84,5 +86,9 @@ public class MainView {
 
     public void setCourseHandler(CourseHandler courseHandler) {
         this.courseHandler = courseHandler;
+    }
+
+    public void setEnrollmentHandler(EnrollmentHandler enrollmentHandler) {
+        this.enrollmentHandler = enrollmentHandler;
     }
 }

@@ -4,43 +4,44 @@ import java.util.List;
 
 public class Enrollment {
 
-    private Student student;
-    private Course course;
-    private String enrollmentDate;
+    private String registrationDate;
+    private String studentEmail;
+    private int courseId;
 
-    public Enrollment(Student student, Course course, String enrollmentDate ) {
-        this.student = student;
-        this.course = course;
-        this.enrollmentDate = enrollmentDate;
+    public Enrollment(String registrationDate, String studentEmail, int courseId) {
+        this.registrationDate = registrationDate;
+        this.studentEmail = studentEmail;
+        this.courseId = courseId;
     }
 
-    public Student getStudent() {
-        return student;
+    public String getRegistrationDate() {
+        return registrationDate;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setRegistrationDate(String registrationDate) {
+        this.registrationDate = registrationDate;
     }
 
-    public Course getCourse() {
-        return course;
+    public String getStudentEmail() {
+        return studentEmail;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setStudentEmail(String studentEmail) {
+        this.studentEmail = studentEmail;
     }
 
-    public String getEnrollmentDate() {
-        return enrollmentDate;
+    public int getCourseId() {
+        return courseId;
     }
 
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
+    }
 
-
-
-  
-
-    
-    
-
+    @Override
+    public String toString() {
+        return "" + registrationDate + ", " + studentEmail + ", "
+                + courseId;
+    }
 
 }
