@@ -1,15 +1,9 @@
 package gui;
 
-import java.sql.Date;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.List;
-
-import domain.Enrollment;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
@@ -22,7 +16,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import logic.EnrollmentHandler;
 import logic.OverviewHandler;
 
 public class OverviewView {
@@ -55,17 +48,17 @@ public class OverviewView {
         radioButton4.setToggleGroup(toggleGroup);
 
         RadioButton radioButton5 = new RadioButton("Top 3 meest bekeken webcasts");
-        radioButton4.setToggleGroup(toggleGroup);
+        radioButton5.setToggleGroup(toggleGroup);
 
         RadioButton radioButton6 = new RadioButton("Top 3 cursussen met meeste uitgegeven certificaten");
-        radioButton4.setToggleGroup(toggleGroup);
+        radioButton6.setToggleGroup(toggleGroup);
 
         RadioButton radioButton7 = new RadioButton("Aanbevolen cursussen voor een geselecteerde cursus");
-        radioButton4.setToggleGroup(toggleGroup);
+        radioButton7.setToggleGroup(toggleGroup);
 
         RadioButton radioButton8 = new RadioButton(
                 "Aantal cursisten dat een geselecteerde cursus in zijn geheel heeft behaald");
-        radioButton4.setToggleGroup(toggleGroup);
+        radioButton8.setToggleGroup(toggleGroup);
 
         VBox crudOptions = new VBox();
         crudOptions.setPadding(new Insets(10));
@@ -158,8 +151,23 @@ public class OverviewView {
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }
-
+            } else if (selectedText.equals("Gemiddelde voortgang per module van alle accounts")) {
+                overview2(courseIdField, textArea, overviewHandler);
+            } else if (selectedText.equals("Behaalde certificaten voor een geselecteerd account")) {
+                overview4(emailField, textArea, overviewHandler);
+            } else if (selectedText.equals("Voortgang per module voor een geselecteerd account en cursus")) {
+                overview3(emailField, courseIdField, textArea, overviewHandler);
+            } else if (selectedText.equals("Top 3 meest bekeken webcasts")) {
+                overview5(textArea, overviewHandler);
+            } else if (selectedText.equals("Top 3 cursussen met meeste uitgegeven certificaten")) {
+                overview6(textArea, overviewHandler);
+            } else if (selectedText
+                    .equals("Aantal cursisten dat een geselecteerde cursus in zijn geheel heeft behaald")) {
+                overview8(courseIdField, textArea, overviewHandler);
+            } else if (selectedText.equals("Aanbevolen cursussen voor een geselecteerde cursus")) {
+                overview7(courseIdField, textArea, overviewHandler);
             }
+
         });
         // Create the labels
         Label emailLabel = new Label("Student email:");
@@ -213,4 +221,33 @@ public class OverviewView {
         textArea.setText(result);
     }
 
+    public void overview2(TextField courseField, TextArea textArea, OverviewHandler overviewHandler) {
+        int courseId = Integer.parseInt(courseField.getText());
+        textArea.setText(overviewHandler.overview2(courseId));
+    }
+
+    public void overview4(TextField emailField, TextArea textArea, OverviewHandler overviewHandler) {
+        textArea.setText(overviewHandler.overview4(emailField.getText()));
+    }
+
+    public void overview3(TextField emailField, TextField courseField, TextArea textArea,
+            OverviewHandler overviewHandler) {
+        textArea.setText(overviewHandler.overview3(emailField.getText(), Integer.parseInt(courseField.getText())));
+    }
+
+    public void overview5(TextArea textArea, OverviewHandler overviewHandler) {
+        textArea.setText(overviewHandler.overview5());
+    }
+
+    public void overview6(TextArea textArea, OverviewHandler overviewHandler) {
+        textArea.setText(overviewHandler.overview6());
+    }
+
+    public void overview8(TextField courseIdField, TextArea textArea, OverviewHandler overviewHandler) {
+        textArea.setText(overviewHandler.overview8(Integer.parseInt(courseIdField.getText())));
+    }
+
+    public void overview7(TextField courseIdField, TextArea textArea, OverviewHandler overviewHandler) {
+        textArea.setText(overviewHandler.overview7(Integer.parseInt(courseIdField.getText())));
+    }
 }

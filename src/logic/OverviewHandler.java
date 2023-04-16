@@ -1,11 +1,6 @@
 package logic;
 
-import domain.*;
-
 import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.List;
-
 import data.OverviewRepository;
 
 public class OverviewHandler {
@@ -19,31 +14,31 @@ public class OverviewHandler {
         return overviewRepository.overview1(gender);
     }
 
-    public void overview2(int courseID) {
-
+    public String overview2(int courseID) {
+        return overviewRepository.overview2(courseID);
     }
 
-    public void overview3(String email, int courseID) {
-
+    public String overview3(String email, int courseID) {
+        return overviewRepository.overview3(email, courseID);
     }
 
-    public void overview4(String email) {
-
+    public String overview4(String email) {
+        return overviewRepository.overview4(email);
     }
 
-    public void overview5() {
-
+    public String overview5() {
+        return overviewRepository.overview5();
     }
 
-    public void overview6() {
-
+    public String overview6() {
+        return overviewRepository.overview6();
     }
 
-    public void overview7(int courseID) {
-
+    public String overview7(int courseID) {
+        return overviewRepository.overview7(courseID);
     }
 
-    public void overview8(int courseID) {
-
+    public String overview8(int courseID) {
+        return overviewRepository.overview8(courseID);
     }
 }
