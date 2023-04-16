@@ -69,19 +69,17 @@ public class MailToolsTest {
         assertEquals(false, result);
     }
 
-
     // not working yet!!
-    // @Test
-    // public void testInputRequiresEmailWithoutTLDEnsureFalse() {
-    //     // Arrange
-    //     String email = "test@example";
+    @Test
+    public void testInputRequiresEmailWithoutTLDEnsureFalse() {
+        // Arrange
+        String email = "test@example.";
 
-    //     // Act
-    //     Boolean result = MailTools.validateMailAddress(email);
+        // Act
+        Boolean result = MailTools.validateMailAddress(email);
 
-    //     // Assert
-    //     assertEquals(false, result);
-    // }
-
+        // Assert
+        assertEquals(false, result);
+    }
 
 }
