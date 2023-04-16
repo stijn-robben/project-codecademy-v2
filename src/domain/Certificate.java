@@ -2,52 +2,66 @@ package domain;
 
 public class Certificate {
 
-    private String certificateID;
-    private Double grade;
+    private int courseId;
+    private String grade;
     private String approvingEmployeeName;
-    private Enrollment enrollment;
+    private String studentEmail;
+    private String registrationDate;
 
-    public Certificate(double grade, String approvingEmployeeName, Enrollment enrollment) {
-        //this.certificateID = certificateID;
+    public Certificate(int courseId, String grade, String approvingEmployeeName,
+            String studentEmail, String registrationDate) {
+        this.courseId = courseId;
         this.grade = grade;
         this.approvingEmployeeName = approvingEmployeeName;
-        this.enrollment = enrollment;
+        this.studentEmail = studentEmail;
+        this.registrationDate = registrationDate;
     }
 
-    public String getCertificateID() {
-        return certificateID;
+    public int getCourseId() {
+        return courseId;
     }
 
-    public String getCourseID() {
-        return enrollment.getCourse().getId();
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
     }
 
-    public double getGrade() {
+    public String getGrade() {
         return grade;
     }
 
-    public String getGradeInString() {
-        return grade.toString();
+    public void setGrade(String grade) {
+        this.grade = grade;
     }
 
     public String getApprovingEmployeeName() {
         return approvingEmployeeName;
     }
 
-    public Enrollment getEnrollment() {
-        return enrollment;
+    public void setApprovingEmployeeName(String approvingEmployeeName) {
+        this.approvingEmployeeName = approvingEmployeeName;
     }
 
     public String getStudentEmail() {
-        return enrollment.getStudent().getEmail();
+        return studentEmail;
+    }
+
+    public void setStudentEmail(String studentEmail) {
+        this.studentEmail = studentEmail;
     }
 
     public String getRegistrationDate() {
-        return enrollment.getEnrollmentDate();
+        return registrationDate;
     }
 
-    
+    public void setRegistrationDate(String registrationDate) {
+        this.registrationDate = registrationDate;
+    }
 
-    
-    
+    @Override
+    public String toString() {
+        return "Course ID: " + courseId + ", Grade: " + grade
+                + ", " + approvingEmployeeName + ", " + studentEmail
+                + ", " + registrationDate + "";
+    }
+
 }

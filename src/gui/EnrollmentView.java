@@ -107,7 +107,6 @@ public class EnrollmentView {
             RadioButton selectedRadioButton = (RadioButton) selectedToggle;
             String selectedText = selectedRadioButton.getText();
             if (selectedText.equals("Create an enrollment")) {
-
                 try {
                     createEnrollment(registrationDate, emailField, courseIdField, textArea, enrollmentHandler);
                 } catch (SQLException e1) {

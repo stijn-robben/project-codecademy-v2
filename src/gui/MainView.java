@@ -8,6 +8,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import logic.CertificateHandler;
 import logic.CourseHandler;
 import logic.EnrollmentHandler;
 import logic.StudentHandler;
@@ -21,6 +22,7 @@ public class MainView {
     private StudentHandler studentHandler;
     private CourseHandler courseHandler;
     private EnrollmentHandler enrollmentHandler;
+    private CertificateHandler certificateHandler;
 
     public void mainView(Stage stage) {
         VBox vbox = new VBox();
@@ -52,7 +54,7 @@ public class MainView {
         button1.setOnAction(e -> studentView.studentView(stage, this, studentHandler));
         button2.setOnAction(e -> courseView.courseView(stage, this, courseHandler));
         button3.setOnAction(e -> enrollementView.enrollmentView(stage, this, enrollmentHandler));
-        button4.setOnAction(e -> certificateView.certificateView(stage, this));
+        button4.setOnAction(e -> certificateView.certificateView(stage, this, certificateHandler));
         button5.setOnAction(e -> overviewView.overviewView(stage, this));
 
         Scene mainView = new Scene(vbox, 600, 400);
@@ -90,5 +92,9 @@ public class MainView {
 
     public void setEnrollmentHandler(EnrollmentHandler enrollmentHandler) {
         this.enrollmentHandler = enrollmentHandler;
+    }
+
+    public void setCertificateHandler(CertificateHandler certificateHandler) {
+        this.certificateHandler = certificateHandler;
     }
 }
