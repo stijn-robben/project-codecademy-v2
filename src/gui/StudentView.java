@@ -5,9 +5,13 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import InputVerification.DateTools;
+import InputVerification.MailTools;
+import InputVerification.PostalCode;
 import domain.Student;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -257,6 +261,7 @@ public class StudentView {
     public void updateStudent(TextField emailField, TextField nameField, DatePicker birthDateField,
             TextField genderField, TextField addressField, TextField cityField, TextField countryField,
             TextField zipCodeField, StudentHandler studentHandler, TextArea textArea) throws SQLException {
+
         String email = emailField.getText();
         String name = nameField.getText();
         Date birthDate = Date.valueOf(birthDateField.getValue());
@@ -268,6 +273,29 @@ public class StudentView {
         String city = cityField.getText();
         String country = countryField.getText();
         String zipCode = zipCodeField.getText();
+
+        boolean dateBool = DateTools.validateDate(birthDateField.getValue().getDayOfMonth(), birthDateField.getValue().getMonthValue(), birthDateField.getValue().getYear());
+        if (!dateBool) {
+            Alert msg = new Alert(Alert.AlertType.WARNING);
+            msg.setContentText("Geboortedatum is niet geldig!");
+            msg.show();
+
+        }
+        boolean mailBool = MailTools.validateMailAddress(emailField.getText());
+        if (!mailBool) {
+            Alert msg = new Alert(Alert.AlertType.WARNING);
+            msg.setContentText("Email is niet geldig!");
+            msg.show();
+        }
+
+        try {
+            PostalCode.formatPostalCode(zipCodeField.getText());
+            zipCode = PostalCode.formatPostalCode(zipCodeField.getText());
+        } catch (Exception e) {
+            Alert msg = new Alert(Alert.AlertType.WARNING);
+            msg.setContentText("Postcode is niet geldig!");
+            msg.show();
+        }
 
         Student student = new Student(email, name, dateString, gender, address, city, country, zipCode);
         studentHandler.updateStudent(student);
