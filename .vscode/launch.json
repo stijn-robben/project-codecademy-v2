@@ -16,7 +16,7 @@
             "request": "launch",
             "vmArgs": "-p c:\\Users\\stijn\\Desktop\\Drivers\\javafx-sdk-17.0.2\\javafx-sdk-17.0.2\\lib --add-modules javafx.controls",
             "mainClass": "Main",
-            "projectName": "project-codecademy-v2_46f976d7"
+            "projectName": "project-codecademy-v2_6540fec9"
         }
     ]
 }
