@@ -4,7 +4,6 @@ import java.util.List;
 
 public class Module extends ContentItem {
 
- 
     private String nameContactPerson;
     private String emailContactPerson;
     private int duration;
@@ -34,6 +33,4 @@ public class Module extends ContentItem {
     public List<ContentItem> getOrder() {
         return order;
     }
-
-    
 }

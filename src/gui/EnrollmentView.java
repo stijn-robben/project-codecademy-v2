@@ -144,6 +144,7 @@ public class EnrollmentView {
 
         SubmitAndClear.setPadding(new Insets(10, 0, 10, 0));
         SubmitAndClear.setSpacing(10);
+        
         // Create the grid pane and add the input fields and labels to it
         GridPane inputFields = new GridPane();
         inputFields.setPadding(new Insets(10));

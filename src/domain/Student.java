@@ -152,5 +152,4 @@ public class Student {
         return "" + email + ", " + name + ", " + birthDate + ", " + gender
                 + ", " + address + ", " + city + ", " + country + ", " + zipCode + "";
     }
-
 }

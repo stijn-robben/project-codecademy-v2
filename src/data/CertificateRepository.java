@@ -16,7 +16,6 @@ public class CertificateRepository {
         String query = "INSERT INTO Certificate (CourseID, Grade, NameEmployee, StudentEmail, RegistrationDate) VALUES (?, ?, ?, ?, ?)";
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setInt(1, certificate.getCourseId());
-        // statement.setInt(2, certificate.getCertificateID());
         statement.setString(2, certificate.getGrade());
         statement.setString(3, certificate.getApprovingEmployeeName());
         statement.setString(4, certificate.getStudentEmail());

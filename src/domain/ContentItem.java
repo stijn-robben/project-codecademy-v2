@@ -34,10 +34,5 @@ public class ContentItem {
 
     public String getTitle() {
         return title;
-    }
-
-    
-
-    
-    
+    } 
 }

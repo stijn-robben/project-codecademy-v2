@@ -36,7 +36,4 @@ public class Webcast extends ContentItem {
     public String getUrl() {
         return url;
     }
-
-    
-
 }

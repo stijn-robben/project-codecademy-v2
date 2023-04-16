@@ -41,5 +41,4 @@ public class Enrollment {
         return "" + registrationDate + ", " + studentEmail + ", "
                 + courseId;
     }
-
 }

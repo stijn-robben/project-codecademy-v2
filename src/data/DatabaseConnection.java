@@ -9,10 +9,6 @@ public class DatabaseConnection {
     private Connection connection;
     private static final String SQLDriver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 
-    // public DatabaseConnection() throws ClassNotFoundException {
-    // Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-    // }
-
     public static Connection getConnection() throws SQLException {
 
         try {
