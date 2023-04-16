@@ -1,6 +1,6 @@
 package test;
 
-public class DateTools {
+public class DateToolsTest {
     /**
      * @desc Validates is a given date in the form of day, month and year is valid.
      * 

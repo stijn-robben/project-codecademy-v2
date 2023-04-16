@@ -1,6 +1,6 @@
 package test;
 
-public class PostalCode {
+public class PostalCodeTest {
 
     /**
      * @desc Formats the input postal code to a uniform output in the form

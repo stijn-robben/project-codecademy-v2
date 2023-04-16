@@ -1,6 +1,6 @@
 package test;
 
-public class NumericRangeTools {
+public class NumericRangeToolsTest {
 
     /**
      * @desc Validates if the input is within range of 0-100%
