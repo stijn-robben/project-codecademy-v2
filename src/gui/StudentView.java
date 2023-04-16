@@ -154,14 +154,12 @@ public class StudentView {
                             countryField,
                             zipCodeField, studentHandler, textArea);
                 } catch (SQLException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
             } else if (selectedText.equals("Delete a student")) {
                 try {
                     deleteStudent(emailField, studentHandler, textArea);
                 } catch (SQLException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
             }

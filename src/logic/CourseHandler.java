@@ -22,13 +22,12 @@ public class CourseHandler {
         return courseRepository.getCourse();
     }
 
-
-    public void deleteCourse(String courseName) throws SQLException {
-        courseRepository.deleteCourse(courseName);
+    public void deleteCourse(int courseID) throws SQLException {
+        courseRepository.deleteCourse(courseID);
     }
 
-    public void updateCourse(Course course, String originalCourseName) throws SQLException {
-        courseRepository.updateCourse(course, originalCourseName);
+    public void updateCourse(Course course, int courseID) throws SQLException {
+        courseRepository.updateCourse(course, courseID);
     }
 
 }
