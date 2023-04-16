@@ -1,10 +1,7 @@
 package domain;
 
-import java.util.ArrayList;
-
 public class Course {
 
-    private String id;
     private String name;
     private String subject;
     private String level;
@@ -15,10 +12,6 @@ public class Course {
         this.subject = subject;
         this.level = level;
         this.introText = introText;
-    }
-
-    public String getId() {
-        return id;  // can be removed because db gives auto id?
     }
 
     public String getName() {
@@ -35,10 +28,6 @@ public class Course {
 
     public String getIntroText() {
         return introText;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public void setName(String name) {
@@ -59,8 +48,7 @@ public class Course {
 
     @Override
     public String toString() {
-        return "Course [id=" + id + ", name=" + name + ", subject=" + subject + ", level=" + level + ", introText="
-                + introText + "]";
+        return "Course [name=" + name + ", subject=" + subject + ", level=" + level + ", introText=" + introText + "]";
     }
 
 }

@@ -1,15 +1,12 @@
 package data;
 
 import domain.Certificate;
-import domain.Enrollment;
-import domain.Student;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CertificateRepository {
     private final Connection connection;
-    private EnrollmentRepository enrollmentRepository;
 
     public CertificateRepository(Connection connection) {
         this.connection = connection;

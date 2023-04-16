@@ -1,7 +1,6 @@
 package data;
 
 import domain.Enrollment;
-import domain.Student;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

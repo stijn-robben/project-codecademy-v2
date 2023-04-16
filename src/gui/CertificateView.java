@@ -1,6 +1,5 @@
 package gui;
 
-import java.security.cert.CertStoreException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -8,7 +7,6 @@ import java.util.List;
 
 import javafx.scene.control.DatePicker;
 import domain.Certificate;
-import domain.Enrollment;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -25,7 +23,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import logic.CertificateHandler;
-import logic.EnrollmentHandler;
 
 public class CertificateView {
     public void certificateView(Stage stage, MainView mainView, CertificateHandler certificateHandler) {
@@ -132,14 +129,12 @@ public class CertificateView {
                     createCertificate(emailField, gradeField, employeeField, courseIdField,
                             registrationDate, textArea, certificateHandler);
                 } catch (SQLException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
             } else if (selectedText.equals("Get all certificates")) {
                 try {
                     getCertificates(textArea, certificateHandler);
                 } catch (SQLException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
             } else if (selectedText.equals("Update a certificate")) {
@@ -147,14 +142,12 @@ public class CertificateView {
                     updateCertificate(emailField, gradeField, employeeField, courseIdField, certificateIdField,
                             registrationDate, textArea, certificateHandler);
                 } catch (SQLException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
             } else if (selectedText.equals("Delete a certificate")) {
                 try {
                     deleteCertificate(certificateIdField, textArea, certificateHandler);
                 } catch (SQLException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
             }

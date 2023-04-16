@@ -6,7 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import domain.Enrollment;
-import domain.Student;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -24,7 +23,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import logic.EnrollmentHandler;
-import logic.StudentHandler;
 
 public class EnrollmentView {
     public void enrollmentView(Stage stage, MainView mainView, EnrollmentHandler enrollmentHandler) {
@@ -110,7 +108,6 @@ public class EnrollmentView {
                 try {
                     createEnrollment(registrationDate, emailField, courseIdField, textArea, enrollmentHandler);
                 } catch (SQLException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
 
@@ -124,14 +121,12 @@ public class EnrollmentView {
                 try {
                     updateEnrollment(registrationDate, emailField, courseIdField, textArea, enrollmentHandler);
                 } catch (SQLException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
             } else if (selectedText.equals("Delete an enrollment")) {
                 try {
                     deleteEnrollment(emailField, courseIdField, textArea, enrollmentHandler);
                 } catch (SQLException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
             }

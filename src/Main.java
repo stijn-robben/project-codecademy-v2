@@ -1,13 +1,10 @@
-import java.sql.Connection;
 import java.sql.SQLException;
 
 import data.*;
 import logic.*;
-import domain.*;
 import gui.*;
 
 import javafx.application.Application;
-import javafx.scene.chart.PieChart.Data;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -28,6 +25,7 @@ public class Main extends Application {
         EnrollmentHandler enrollmentHandler = new EnrollmentHandler(DatabaseConnection.getConnection());
         StudentHandler studentHandler = new StudentHandler(DatabaseConnection.getConnection());
         CertificateHandler certificateHandler = new CertificateHandler(DatabaseConnection.getConnection());
+        CourseHandler courseHandler = new CourseHandler(DatabaseConnection.getConnection());
         MainView mainView = new MainView();
         mainView.setStudentView(studentView);
         mainView.setOverviewView(overviewView);
@@ -37,6 +35,7 @@ public class Main extends Application {
         mainView.setStudentHandler(studentHandler);
         mainView.setEnrollmentHandler(enrollmentHandler);
         mainView.setCertificateHandler(certificateHandler);
+        mainView.setCourseHandler(courseHandler);
         stage.setTitle(
                 "Stijn Robben (2205997), Stefan Dekkers (2198892), Bas Dekker (2195403), Jozef van Dijk (2187288)");
 
