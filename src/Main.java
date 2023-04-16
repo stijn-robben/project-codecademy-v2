@@ -26,6 +26,8 @@ public class Main extends Application {
         StudentHandler studentHandler = new StudentHandler(DatabaseConnection.getConnection());
         CertificateHandler certificateHandler = new CertificateHandler(DatabaseConnection.getConnection());
         CourseHandler courseHandler = new CourseHandler(DatabaseConnection.getConnection());
+        OverviewHandler overviewHandler = new OverviewHandler(DatabaseConnection.getConnection());
+
         MainView mainView = new MainView();
         mainView.setStudentView(studentView);
         mainView.setOverviewView(overviewView);
@@ -36,6 +38,7 @@ public class Main extends Application {
         mainView.setEnrollmentHandler(enrollmentHandler);
         mainView.setCertificateHandler(certificateHandler);
         mainView.setCourseHandler(courseHandler);
+        mainView.setOverviewHandler(overviewHandler);
         stage.setTitle(
                 "Stijn Robben (2205997), Stefan Dekkers (2198892), Bas Dekker (2195403), Jozef van Dijk (2187288)");
 

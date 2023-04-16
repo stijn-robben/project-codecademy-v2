@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import logic.CertificateHandler;
 import logic.CourseHandler;
 import logic.EnrollmentHandler;
+import logic.OverviewHandler;
 import logic.StudentHandler;
 
 public class MainView {
@@ -23,6 +24,7 @@ public class MainView {
     private CourseHandler courseHandler;
     private EnrollmentHandler enrollmentHandler;
     private CertificateHandler certificateHandler;
+    private OverviewHandler overviewHandler;
 
     public void mainView(Stage stage) {
         VBox vbox = new VBox();
@@ -55,7 +57,7 @@ public class MainView {
         button2.setOnAction(e -> courseView.courseView(stage, this, courseHandler));
         button3.setOnAction(e -> enrollementView.enrollmentView(stage, this, enrollmentHandler));
         button4.setOnAction(e -> certificateView.certificateView(stage, this, certificateHandler));
-        button5.setOnAction(e -> overviewView.overviewView(stage, this));
+        button5.setOnAction(e -> overviewView.overviewView(stage, this, overviewHandler));
 
         Scene mainView = new Scene(vbox, 600, 400);
         stage.setScene(mainView);
@@ -96,5 +98,9 @@ public class MainView {
 
     public void setCertificateHandler(CertificateHandler certificateHandler) {
         this.certificateHandler = certificateHandler;
+    }
+
+    public void setOverviewHandler(OverviewHandler overviewHandler) {
+        this.overviewHandler = overviewHandler;
     }
 }
